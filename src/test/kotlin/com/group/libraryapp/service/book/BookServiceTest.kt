@@ -1,6 +1,6 @@
 package com.group.libraryapp.service.book
 
-import com.group.libraryapp.domain.book.Book
+import com.group.libraryapp.domain.Book
 import com.group.libraryapp.domain.book.BookRepository
 import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
@@ -98,6 +98,4 @@ class BookServiceTest @Autowired constructor(
         assertThat(results).hasSize(1)
         assertThat(results[0].isReturn).isTrue
     }
-
-
 }
