@@ -1,7 +1,7 @@
 package com.group.libraryapp.service.user;
 
 import com.group.libraryapp.domain.user.User;
-import com.group.libraryapp.domain.user.UserRepository;
+import com.group.libraryapp.domain.user.JavaUserRepository;
 import com.group.libraryapp.dto.user.request.UserCreateRequest;
 import com.group.libraryapp.dto.user.request.UserUpdateRequest;
 import com.group.libraryapp.dto.user.response.UserResponse;
@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
 
-  private final UserRepository userRepository;
+  private final JavaUserRepository userRepository;
 
-  public UserService(UserRepository userRepository) {
+  public UserService(JavaUserRepository userRepository) {
     this.userRepository = userRepository;
   }
 
