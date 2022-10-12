@@ -9,6 +9,7 @@ import com.group.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository
 import com.group.libraryapp.dto.book.request.BookLoanRequest
 import com.group.libraryapp.dto.book.request.BookRequest
 import com.group.libraryapp.dto.book.request.BookReturnRequest
+import com.group.libraryapp.util.fail
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -27,18 +28,18 @@ open class BookService(
 
     @Transactional
     open fun loanBook(request: BookLoanRequest) {
-        val book = bookRepository.findByName(request.bookName) ?: throw IllegalArgumentException()
+        val book = bookRepository.findByName(request.bookName) ?: fail()
         if (userLoanHistoryRepository.findByBookNameAndIsReturn(request.bookName, false) != null) {
             throw IllegalArgumentException("진작 대출되어 있는 책입니다")
         }
 
-        val user = userRepository.findByName(request.userName) ?: throw IllegalArgumentException()
+        val user = userRepository.findByName(request.userName) ?: fail()
         user.loanBook(book)
     }
 
     @Transactional
     open fun returnBook(request: BookReturnRequest) {
-        val user = userRepository.findByName(request.userName) ?: throw IllegalArgumentException()
+        val user = userRepository.findByName(request.userName) ?: fail()
         user.returnBook(request.bookName)
     }
 }
