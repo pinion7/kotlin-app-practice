@@ -12,30 +12,30 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-open class UserService(
+class UserService(
     private val userRepository: UserRepository
 ) {
 
     @Transactional
-    open fun saveUser(request: UserCreateRequest) {
+    fun saveUser(request: UserCreateRequest) {
         val newUser = User(request.name, request.age)
         userRepository.save(newUser)
     }
 
     @Transactional(readOnly = true)
-    open fun getUsers(): List<UserResponse> {
+    fun getUsers(): List<UserResponse> {
         return userRepository.findAll()
-            .map { user -> UserResponse(user) }
+            .map { user -> UserResponse.of(user) }
     }
 
     @Transactional
-    open fun updateUserName(request: UserUpdateRequest) {
+    fun updateUserName(request: UserUpdateRequest) {
         val user = userRepository.findByIdOrThrow(request.id)
         user.updateName(request.name)
     }
 
     @Transactional
-    open fun deleteUser(name: String) {
+    fun deleteUser(name: String) {
         val user = userRepository.findByName(name) ?: fail()
         userRepository.delete(user)
     }

@@ -10,25 +10,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class BookController {
+public class JavaBookController {
 
   private final JavaBookService bookService;
 
-  public BookController(JavaBookService bookService) {
+  public JavaBookController(JavaBookService bookService) {
     this.bookService = bookService;
   }
 
-  @PostMapping("/book")
+  @PostMapping("/java/book")
   public void saveBook(@RequestBody JavaBookRequest request) {
     bookService.saveBook(request);
   }
 
-  @PostMapping("/book/loan")
+  @PostMapping("/java/book/loan")
   public void loanBook(@RequestBody JavaBookLoanRequest request) {
     bookService.loanBook(request);
   }
 
-  @PutMapping("/book/return")
+  @PutMapping("/java/book/return")
   public void returnBook(@RequestBody JavaBookReturnRequest request) {
     bookService.returnBook(request);
   }

@@ -14,20 +14,20 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-open class BookService(
+class BookService(
     private val bookRepository: BookRepository,
     private val userRepository: UserRepository,
     private val userLoanHistoryRepository: UserLoanHistoryRepository
 ) {
 
     @Transactional
-    open fun saveBook(request: BookRequest) {
+    fun saveBook(request: BookRequest) {
         val book = Book(request.name)
         bookRepository.save(book)
     }
 
     @Transactional
-    open fun loanBook(request: BookLoanRequest) {
+    fun loanBook(request: BookLoanRequest) {
         val book = bookRepository.findByName(request.bookName) ?: fail()
         if (userLoanHistoryRepository.findByBookNameAndIsReturn(request.bookName, false) != null) {
             throw IllegalArgumentException("진작 대출되어 있는 책입니다")
@@ -38,7 +38,7 @@ open class BookService(
     }
 
     @Transactional
-    open fun returnBook(request: BookReturnRequest) {
+    fun returnBook(request: BookReturnRequest) {
         val user = userRepository.findByName(request.userName) ?: fail()
         user.returnBook(request.bookName)
     }
