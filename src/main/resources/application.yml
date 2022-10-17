@@ -12,6 +12,11 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+
+  output:
+    ansi:
+      enabled: always
+
   h2:
     console:
       enabled: true
